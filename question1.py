@@ -35,14 +35,27 @@ v2=[2,2,2]
 
 # Question 3
 #Write a function to implement k-NN classifier. k is a variable and based on that the count of neighbors should be selected
-def knn_Classifier(data,k):
-    data=list(data.items())
-    key=0
-    for i in data[0]:
-        if type(i)==int:
-            key=i
-    encodedlist=data.sort(key=lambda x: x[1])
-    return encodedlist
+def knn_classifier(X, y, k):
+    predicted_labels = []
+    
+    for i in range(len(X)):
+        distances = []
+        for j in range(len(X)):
+            distance = 0
+            for m in range(len(X[i])):
+                distance += (X[i][m] - X[j][m])**2
+            distances.append(distance**0.5)
+        
+        nearest_indices = sorted(range(len(distances)), key=lambda x: distances[x])[:k]
+        nearest_labels = [y[idx] for idx in nearest_indices]
+        
+        unique_labels = list(set(nearest_labels))
+        counts = [nearest_labels.count(label) for label in unique_labels]
+        
+        predicted_label = unique_labels[counts.index(max(counts))]
+        predicted_labels.append(predicted_label)
+    
+    return predicted_labels
     
 # Question 3
 #Write a function to convert categorical variables to numeric using label encoding. Don’t use any existing functionalities.
