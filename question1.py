@@ -61,12 +61,12 @@ def knn_classifier(X, y, k):
 #Write a function to convert categorical variables to numeric using label encoding. Don’t use any existing functionalities.
 def labelEncoding(category):
     labels=[i+1 for i in range(len(category))]
-    encoding=dict(zip(labels,category))
+    encoding=dict(zip(labels,set(category)))
     return encoding
 
-# colors=["blue","green","yellow","red"]
-# Colors=labelEncoding(colors)
-# print(Colors)
+colors=["blue","green","red","red"]
+Colors=labelEncoding(colors)
+print(Colors)
 
 # Question 4
 #Write a function to convert categorical variables to numeric using One-Hotencoding. Don’t use any existing functionalities.
